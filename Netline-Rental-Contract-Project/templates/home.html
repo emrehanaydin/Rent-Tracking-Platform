@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+
+
+    <title>NETLINE</title>
+</head>
+<body style="overflow-x: hidden">
+
+
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom" style="background: #283c86;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #283c86, #45a247);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #283c86, #45a247); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+    <a href="/home" class="align-items-center text-dark text-decoration-none" style="padding-left:50px">
+
+        <span class="fs-2">NETLINE</span>
+
+
+    </a>
+
+    <nav class=" mt-md-0 ms-md-auto py-1 text-center">
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#" type="button" id="kiraci_bilgileri">Kiracı
+            Bilgileri</a>
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#" type="button" id="kira_bilgileri">Kira
+            Bilgileri</a>
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#" id="vergiler">Vergiler</a>
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#" id="sigorta_bilgileri">Sigorta Bilgileri</a>
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#" id="aidat_bilgileri">Aidat ve Ortak Giderler</a>
+        <a class="me-4 py-3 text-dark text-decoration-none" href="#">Raporlar</a>
+    </nav>
+    <a class="btn btn-outline-primary me-2 py-1" style="color: #ffffff; border-color: #000000;" href="/exit">Çıkış
+        Yap</a>
+</div>
+
+<div class="container" id="" style="font-size: x-small;">
+    <div class="row">
+        <div class="col-md-2" id="kiracibilgisi">
+            <div class="card" style="background-color: #000;">
+                <div class="card bg-success">
+                    <div class="card-body" id="tenant" style="">
+                        <a href="#" style="text-decoration:none;color:black"><h2
+                        >
+                            Kiracı Bilgileri</h2>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2" id="kirabilgisi">
+            <div class="card" style="background-color: #000;">
+                <div class="card-body bg-secondary" id="rent_info">
+                    <a href="#" style="text-decoration:none;color:black"><h2>
+                        Kira Bilgileri</h2></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2" id="vergiler_">
+            <div class="card" style="background-color: #000;">
+                <div class="card-body bg-info">
+                    <a href="#" style="text-decoration:none;color:black"><h2>
+                        Vergi Bilgileri</h2></a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2" id="sigorta_bilgileri_">
+            <div class="card" style="background-color: #000;">
+                <div class="card-body bg-warning">
+                    <a href="#" style="text-decoration:none;color:black"><h2>
+                        Sigorta Bilgileri</h2></a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2" id="aidat_bilgileri_">
+            <div class="card" style="background-color: #000;">
+                <div class="card-body bg-danger">
+                    <a href="#" style="text-decoration:none;color:black"><h2>
+                        Aidat Bilgileri</h2></a>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="background-color: #000;">
+                <div class="card-body bg-primary">
+                    <a href="#" style="text-decoration:none;color:black"><h2>
+                        Rapor Bilgileri</h2></a>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<nav class="mt-2 mt-md-0 ms-md-auto py-4 text-center">
+    <a class="me-4 py-3 text-dark text-decoration-none" href="#" type="button" id="tenant_info_"
+    ><b>Kiracı
+        Bilgileri</b></a>
+    <a class="me-4 py-3 text-dark text-decoration-none" href="#" type="button" id="rent_info_"><b>Kira Bilgileri</b></a>
+    <a class="me-4 py-3 text-dark text-decoration-none" href="#" id="tax_info_"><b>Vergiler</b></a>
+    <a class="me-4 py-3 text-dark text-decoration-none" href="#"><b>Sigorta Bilgileri</b></a>
+    <a class="me-4 py-3 text-dark text-decoration-none" href="#"><b>Aidat ve Ortak Giderler</b></a>
+
+</nav>
+
+
+<div class="container" id="btn-1" style="display: none">
+
+
+    <div class="row">
+        <div class="col-md-12" style="width:100%;">
+            <div style="border-style: solid;padding: inherit;">
+                <form class="form" method="post" action="/tenant">
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="Adı Soyadı / Kurum Adı" name="name_surname"
+                                   required data-error="Lütfen bu alanı doldurunuz."
+                            >
+                            <!--oninvalid="setCustomValidity('Lütfen bu alanı doldurunuz')" required-->
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="email"
+                                   class="form-control"
+                                   placeholder="Email"
+
+                                   name="email">
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="TC / Vergi Numarası" name="TC"
+                                   minlength="10" maxlength="11"
+                                   onkeypress='return event.keyCode >= 48 && event.keyCode <= 57'
+                            >
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input style="background: aliceblue;" type="text" class="form-control"
+                                   placeholder="Banka Hesap Numarası"
+                                   onkeypress='return event.keyCode >= 48 && event.keyCode <= 57'
+
+                                   name="bank_account_no">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   oninvalid="setCustomValidity('Lütfen bu alanı doldurunuz')"
+                                   class="form-control"
+                                   name="phone"
+                                   id="phone_"
+                                   placeholder="Telefon Numarası"
+                            >
+                            <script>
+
+                                $("#phone_").inputmask({"mask": "(999)999-99-99"});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="Banka IBAN Numarası" name="iban_no" id="iban_"
+
+                            >
+                            <script>
+
+                                $("#iban_").inputmask({"mask": "TR99 9999-9999-9999-9999-9999-99"});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <textarea autocomplete="off" style="background: aliceblue;"
+                                      class="form-control"
+                                      required
+                                      placeholder="Adres (Kontrat Adresi)" name="address"></textarea>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="pt-4">Sözleşme İmza Tarihi</label>
+                            <input autocomplete="off" style="background: aliceblue;"
+
+                                   type="date"
+                                   class="form-control"
+                                   placeholder="Sözleşme İmza Tarihi" name="contract_date"
+                            >
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <textarea style="background: aliceblue;" class="form-control"
+                                      placeholder="Adres2 (Kişisel Adres)"
+                                      autocomplete="off" name="address2"></textarea>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label class="pt-4">Sözleşme Başlangıç Tarihi</label>
+                            <input autocomplete="off" style="background: aliceblue;" type="date"
+                                   class="form-control"
+                                   placeholder="Sözleşme Başlangıç Tarihi"
+                                   name="contract_start_date">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 py-4 text-center">
+
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+
+
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container" id="btn-2" style="display: none">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="border-style: solid; padding: inherit;">
+                <form class="form" method="post" action="/rent_info">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <select id="inputMoney" style="background: aliceblue;" class="form-control"
+                                    name="rent_unit">
+                                <option selected>Kira Birimi Seçiniz...</option>
+                                <option>₺</option>
+                                <option>$</option>
+                                <option>€</option>
+
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <select id="inputMoney-Deposite" style="background: aliceblue;" class="form-control"
+                                    name="deposit_unit">
+                                <option selected>Depozit Birimi Seçiniz...</option>
+                                <option>₺</option>
+                                <option>$</option>
+                                <option>€</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="row pb-2">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input type="text" style="background: aliceblue;"
+                                   class="form-control" placeholder="Kira Tutarı"
+                                   name="rent_price" id="typeNumber">
+
+
+                            <script>
+                                    var formatter = new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: 'TRY',
+                                    });
+
+                                    document.querySelector('#typeNumber').addEventListener('change', (e) => {
+                                        if (isNaN(e.target.value)) {
+                                            e.target.value = ''
+                                        } else {
+                                            e.target.value = formatter.format(e.target.value);
+                                        }
+                                    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Depozit Tutarı"
+                                   name="deposit_price" id="deposit_price">
+
+                            <script>
+                                var formatter = new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'TRY',
+                                });
+
+                                document.querySelector('#deposit_price').addEventListener('change', (e) => {
+                                    if (isNaN(e.target.value)) {
+                                        e.target.value = ''
+                                    } else {
+                                        e.target.value = formatter.format(e.target.value);
+                                    }
+                                })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+                        </div>
+                    </div>
+
+
+                    <div class="row pb-2">
+                        <div class="col-lg-6 col-sm-12">
+                            <label>Kira Ödeme Tarihi</label>
+                            <input type="date" style="background: aliceblue;" class="form-control" placeholder=""
+                                   name="rent_date">
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="d-block py-1">Kira Artışı Olacak mı ? </label>
+
+
+                            <label>
+                                <input type="radio" id="yes" name="rent_increase" value="EVET">
+                                Evet
+
+                            </label>
+                            <label>
+                                <input type="radio" id="no" name="rent_increase" value="HAYIR">
+                                Hayır
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+
+
+                            <label for="inputState">Kira Ödeme Periyodu</label>
+                            <select id="inputState" style="background: aliceblue;" class="form-control"
+                                    name="rent_payment_date">
+                                <option selected>Seçiniz...</option>
+                                <option>Her Yılbaşı</option>
+                                <option>Her Dönembaşı</option>
+                                <option>Her Aybaşı</option>
+                                <option>Her 3 Ayda Bir Dönembaşı</option>
+                                <option>Her 6 Ayda Bir Dönembaşı</option>
+                                <option>Her Ayın x Günü Sonraki Ay İçin</option>
+                                <option>Her Ayın x Günü Mevcut Ay İçin</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-lg-6 col-sm-12">
+                            <label>İlk Artış Yapılacağı Dönem Tarihi</label>
+                            <input type="date" style="background: aliceblue;" class="form-control" placeholder=""
+                                   name="first_increase_period">
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <select id="inputMoney-Price" class="form-control" style="background: aliceblue;"
+                                    name="down_payment_unit">
+                                <option selected>Peşinat Birimi Seçiniz...</option>
+                                <option>₺</option>
+                                <option>$</option>
+                                <option>€</option>
+                                <option>Yok</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <select id="input-Price-Interest" style="background: aliceblue;" class="form-control"
+                                    name="rent_increase_period_date">
+                                <option selected>Kira Artış Periyodunu Seçiniz...</option>
+                                <option>Yıllık</option>
+                                <option>6 Ayda Bir</option>
+                                <option>3 Ayda Bir</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Peşinat Tutarı" id="pesinat"
+                                   name="advance_payment">
+                            <script>
+                                var formatter = new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'TRY',
+                                });
+
+                                document.querySelector('#pesinat').addEventListener('change', (e) => {
+                                    if (isNaN(e.target.value)) {
+                                        e.target.value = ''
+                                    } else {
+                                        e.target.value = formatter.format(e.target.value);
+                                    }
+                                })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <select id="input_rent_increase_rate" style="background: aliceblue;" class="form-control"
+                                    name="rent_increase_rate">
+                                <option selected>Kira Artış Oranı..</option>
+                                <option>TEFE</option>
+                                <option>TÜFE</option>
+                                <option>(TEFE + TÜFE) \ 2</option>
+                                <option>Son 12 Ayın Ortalaması</option>
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col py-4 text-center">
+
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="display: none;" id="btn-3">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="border-style: solid; padding: inherit;">
+                <form class="form" method="post" action="/taxes" style="overflow-x: hidden">
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <label style="font-weight: bold; font-size:20px;">Konut mu İşyeri mi ?</label>
+                            <div>
+                                <label>
+                                    <input type="radio" id="house" name="residence_or_workplace" value="KONUT">
+                                    Konut
+
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="workplace" name="residence_or_workplace" value="İŞYERİ">
+                                    İşyeri
+
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 pb-2">
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Emlak Vergisi Tutarı" name="property_tax_price" id="emlak">
+
+                            <script>
+                                    var formatter = new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: 'TRY',
+                                    });
+
+                                    document.querySelector('#emlak').addEventListener('change', (e) => {
+                                        if (isNaN(e.target.value)) {
+                                            e.target.value = ''
+                                        } else {
+                                            e.target.value = formatter.format(e.target.value);
+                                        }
+                                    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 pb-2">
+                            <label> </label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Çöp Vergisi Tutarı"
+                                   name="garbage_tax_price" id="cöp">
+                            <script>
+                                        var formatter = new Intl.NumberFormat('en-US', {
+                                            style: 'currency',
+                                            currency: 'TRY',
+                                        });
+
+                                        document.querySelector('#cöp').addEventListener('change', (e) => {
+                                            if (isNaN(e.target.value)) {
+                                                e.target.value = ''
+                                            } else {
+                                                e.target.value = formatter.format(e.target.value);
+                                            }
+                                        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 pb-2">
+
+                            <label class="pb-2">Emlak Vergisi Tarihi</label>
+                            <input type="date" style="background: aliceblue;" class="form-control"
+                                   placeholder="Emlak Vergisi Tarihi" name="property_tax_history">
+                        </div>
+
+
+                        <div class="col-lg-6 col-sm-12 pb-2">
+                            <label class="pb-2">Çöp Vergisi Tarihi</label>
+                            <input type="date" style="
+                                                        background: aliceblue;" class="form-control"
+                                   name="garbage_tax_history">
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="py-2"><b>Emlak Vergisi Ödeme Periyodu</b></label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ocak
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Şubat
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Mart
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Nisan
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Mayıs
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Haziran
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Temmuz
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ağustos
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Eylül
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ekim
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Kasım
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Aralık
+                                    </label></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="py-2"><b>Çöp Vergisi Ödeme Periyodu</b></label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ocak
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Şubat
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Mart
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Nisan
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Mayıs
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Haziran
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Temmuz
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ağustos
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Eylül
+                                    </label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Ekim
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Kasım
+                                    </label></div>
+                                <div class="col-4">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" value=""> Aralık
+                                    </label></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col py-4 text-center">
+
+                                <button type="submit" class="btn btn-primary">
+                                    Kaydet
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" style="display: none" id="btn-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="border-style: solid;padding: inherit;">
+                <form class="form" method="post" action="/insurance_information">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="DASK Sigorta Firması Adı"
+                                   name="dask_company_name">
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   id="police_isyeri_iban"
+                                   placeholder="Poliçe Firması Banka IBAN Numarası" name="policy_company_iban_number">
+                            <script>
+                                $("#police_isyeri_iban").inputmask({"mask": "TR99 9999-9999-9999-9999-9999-99"});
+
+
+
+
+
+                            </script>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="DASK Sigorta Tutarı" name="dask_price" id="dask">
+                            <script>
+                                var formatter = new Intl.NumberFormat('en-US', {
+                                    style: 'currency',
+                                    currency: 'TRY',
+                                });
+
+                                document.querySelector('#dask').addEventListener('change', (e) => {
+                                    if (isNaN(e.target.value)) {
+                                        e.target.value = ''
+                                    } else {
+                                        e.target.value = formatter.format(e.target.value);
+                                    }
+                                })
+
+
+
+                            </script>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label>Poliçe Ödeme Tarihi</label>
+                            <input autocomplete="off" style="background: aliceblue;" type="date"
+                                   class="form-control"
+                                   name="policy_payment_date">
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="DASK Sigorta Firması IBAN Numarası "
+                                   name="dask_company_iban_number"
+                                   id="dask_iban">
+
+                            <script>
+
+                                    $("#dask_iban").inputmask({"mask": "TR99 9999-9999-9999-9999-9999-99"});
+
+
+
+
+
+                            </script>
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label style="font-size: 18px;">
+                                <label>Yangın Poliçesi Var Mı ?</label>
+
+
+                                <label>
+                                    <input type="radio" name="fire_policy" value="EVET">
+                                    Evet
+
+                                </label>
+                                <label>
+                                    <input type="radio" name="fire_policy" value="HAYIR">
+                                    Hayır
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <label>Dask Sigorta Ödeme Tarihi</label>
+                            <input autocomplete="off"
+                                   style="background: aliceblue;"
+                                   type="date"
+                                   class="form-control"
+                                   name="dask_payment_date"
+                                   id="dask_payment_date">
+
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off"
+                                   style="background: aliceblue;"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Poliçe Tutarı" name="fire_policy_price" id="police_fire">
+                            <script>
+                                    var formatter = new Intl.NumberFormat('en-US', {
+                                        style: 'currency',
+                                        currency: 'TRY',
+                                    });
+
+                                    document.querySelector('#police_fire').addEventListener('change', (e) => {
+                                        if (isNaN(e.target.value)) {
+                                            e.target.value = ''
+                                        } else {
+                                            e.target.value = formatter.format(e.target.value);
+                                        }
+                                    })
+
+
+
+                            </script>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label>Dask Sigorta Bitiş Tarihi</label>
+                            <input autocomplete="off"
+                                   style="background: aliceblue;"
+                                   type="date"
+                                   class="form-control"
+                                   name="dask_last_date"
+                                   id="dask_last_date">
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input autocomplete="off"
+                                   style="background: aliceblue;"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Poliçe Firması Banka Hesap Numarası"
+                                   name="policy_company_account_number"
+                                   onkeypress='return event.keyCode >= 48 && event.keyCode <= 57'>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label class="d-block pt-2">İş Yeri Poliçesi Var Mı ? </label>
+
+
+                            <label>
+                                <input type="radio" id="policy_yes" name="policy" value="EVET">
+                                Evet
+
+                            </label>
+                            <label>
+                                <input type="radio" id="policy_no" name="policy" value="HAYIR">
+                                Hayır
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue; " type="text"
+                                   class="form-control"
+                                   name="fire_policy_company_iban_no"
+                                   placeholder="Poliçe Firması Banka IBAN Numarası"
+                                   id="police_iban"
+                            >
+                            <script>
+
+                                    $("#police_iban").inputmask({"mask": "TR99 9999-9999-9999-9999-9999-99"});
+
+
+
+
+                            </script>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label></label>
+                            <input autocomplete="off" style="background: aliceblue;" type="text"
+                                   class="form-control"
+                                   placeholder="Poliçe Tutarı"
+                                   name="policy_price"
+                                   id="is_yeri_poaaalice">
+                            <script>
+                            var formatter = new Intl.NumberFormat('en-US', {
+                                style: 'currency',
+                                currency: 'TRY',
+                            });
+
+                            document.querySelector('#is_yeri_police').addEventListener('change', (e) => {
+                                if (isNaN(e.target.value)) {
+                                    e.target.value = ''
+                                } else {
+                                    e.target.value = formatter.format(e.target.value);
+                                }
+                            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label style=" font-size: 19px;">Yangın Poliçesi Ödeme
+                                Tarihi</label>
+                            <input autocomplete="off" style="background: aliceblue;
+                                                       
+                                                        " type="date"
+                                   class="form-control"
+                                   name="fire_policy_payment_date">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <label></label>
+                        <input autocomplete="off" style="background: aliceblue;" type="text"
+                               class="form-control"
+                               placeholder="Poliçe Firması Hesap Numarası"
+                               name="fire_policy_company_account_no">
+                    </div>
+
+                    <div class="row py-4">
+                        <div class="col text-center">
+
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container" style="display: none" id="btn-5">
+    <div class="row" style="color:#000000; ">
+        <div class=" col-md-12
+    ">
+            <div style="border-style: solid; padding: inherit;">
+                <form class="form" method="post" action="/dues_information">
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 text-center">
+                            <label style="font-weight: bold; font-size:20px;">Site
+                                Aidatı Var
+                                Mı ?</label>
+
+
+                            <div>
+                                <label>
+                                    <input type="radio" id="fdf" name="dues" value="Evet"
+                                    >
+                                    Evet
+
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="fds" name="dues" value="Hayır"
+                                    >
+                                    Hayır
+                                </label>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12 text-center">
+                            <label style="font-weight: bold; font-size:20px;">Site
+                                Ortak
+                                Gideri Var
+                                Mı ?</label>
+
+
+                            <div>
+                                <label>
+                                    <input type="radio" id="y" name="common_expenditure" value="Evet">
+
+                                    Evet
+
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="n" name="common_expenditure" value="Hayır"
+                                    >
+                                    Hayır
+                                </label>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Aidat Tutarı" name="dues_price">
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="
+                                                        background: aliceblue;
+                                                        " class="form-control"
+                                   placeholder="Ortak Giderle İlişkili Diğer Sözleşmeler"
+                                   name="common_expenditure_contract_no">
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Aidat Banka Hesap Numarası" name="dues_account_no">
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="
+                                                        background: aliceblue;
+                                                        " class="form-control"
+                                   placeholder="Ortak Gider Açıklaması"
+                                   name="common_expenditure_description">
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="background: aliceblue;" class="form-control"
+                                   placeholder="Aidat Banka IBAN Numarası" name="dues_iban_no">
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+
+                            <label></label>
+                            <input type="text" style="
+                                                        background: aliceblue;"
+                                   class="form-control"
+                                   placeholder="Ortak Gider Dağılım Anahtarı"
+                                   name="common_expenditure_key">
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <label>Aidat Ödeme Tarihi</label>
+                            <input type="date" style="background: aliceblue;" class="form-control"
+                                   placeholder="Emlak Vergisi Tarihi" name="dues_payment_date">
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <label>Ortak Gider Ödeme Tarihi</label>
+                            <input type="date" style="
+                                                        background: aliceblue;
+                                                       " class="form-control"
+                                   name="common_expenditure_payment_date">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col text-center py-4">
+
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+-->
+<div class="container-fluid" id="tenant_table_info">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron p-3" style="background: black;">
+                <h2><b style="font-size: large; color: aliceblue;">Kira
+                    Bilgileri</b>
+                    <button type="button"
+                            style="color: #fff;
+                            background-color: #539777;
+                            border-color: #00ff89;"
+                            class="btn btn-success float-right"
+                            data-toggle="modal"
+                            data-target="#mymodal">Yeni Kayıt Ekle
+                    </button>
+                </h2>
+
+                <table class="table table-hover table-dark"
+                       style="font-size: xx-small; border-width: 1px; --bs-table-bg: #041f36; ">
+
+
+                    <tr style="color: goldenrod;     border: burlywood;">
+                        <th>Sözleşme No</th>
+                        <th>Adı Soyadı</th>
+                        <th>TC</th>
+                        <th>Telefon No</th>
+                        <th>Adres</th>
+                        <th>Adres 2</th>
+                        <th>Email</th>
+                        <th>Hesap No</th>
+                        <th>IBAN No</th>
+                        <th>Sözleşme İmza Tarihi</th>
+                        <th>Sözleşme Başlangıç Tarihi</th>
+                        <th>İşlem</th>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>{{ contract_id }}</td>
+                        <td>{{ name_surname }}</td>
+                        <td>{{ TC_or_taxes }}</td>
+                        <td>{{ phone }}</td>
+                        <td>{{ address }}</td>
+                        <td>{{ address2 }}</td>
+                        <td>{{ email }}</td>
+                        <td>{{ bank_account_no }}</td>
+                        <td>{{ iban_no }}</td>
+                        <td>{{ contract_date }}</td>
+                        <td>{{ contract_start_date }}</td>
+
+
+                        <td>
+
+
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Düzenle</a>
+                            <a href="" class="btn btn-danger btn-xs"
+                               onclick="return comfirm('Silmek İstediğinize Emin Misiniz ?')">Sil</a>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>1</td>
+                        <td>Emrehan Aydın</td>
+                        <td>43214425434</td>
+                        <td>(531) 707-17-25</td>
+                        <td>Uğurmumcu Mahallesi Orta Siteler no:6 D:16</td>
+                        <td>Uğurmumcu Mahallesi Orta Siteler no:6 D:16</td>
+                        <td>emrehan.aydin@netline.net.tr</td>
+                        <td>5454545454</td>
+                        <td>TR99 9999-9999-9999-9999-9999-99</td>
+                        <td>2021-10-22</td>
+                        <td>2021-10-28</td>
+
+
+                        <td>
+
+
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Düzenle</a>
+                            <a href="" class="btn btn-danger btn-xs"
+                               onclick="return comfirm('Silmek İstediğinize Emin Misiniz ?')">Sil</a>
+
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="rent_table_info" style="display:none">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron p-3" style="background: black;">
+                <h2><b style="font-size: large; color: aliceblue;">Kiracı
+                    Bilgileri</b>
+                    <button type="button"
+                            style="color: #fff;
+                            background-color: #539777;
+                            border-color: #00ff89;"
+                            class="btn btn-success float-right"
+                            data-toggle="modal"
+                            data-target="#mymodal">Yeni Kayıt Ekle
+                    </button>
+                </h2>
+
+                <table class="table table-hover table-dark"
+                       style="font-size: xx-small; border-width: 1px; --bs-table-bg: #041f36; ">
+
+
+                    <tr style="color: goldenrod;     border: burlywood;">
+                        <th>Kira Birimi</th>
+                        <th>Kira Tutarı</th>
+                        <th>Kira Ödeme Tarihi</th>
+                        <th>Kira Ödeme Periyodu</th>
+                        <th>Peşinat Birimi</th>
+                        <th>Peşinat Tutarı</th>
+                        <th>Depozit Birimi</th>
+                        <th>Depozit Tutarı</th>
+                        <th>Kira Artışı</th>
+                        <th>İlk Artış Dönemi</th>
+                        <th>Kira Artış Periyodu</th>
+                        <th>Artış Oranı</th>
+                        <th>İşlem</th>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>₺</td>
+                        <td>2,500.00 ₺</td>
+                        <td>2021-10-22</td>
+                        <td>(531) 707-17-25</td>
+                        <td>Her Ay Başı</td>
+                        <td>₺</td>
+                        <td>200.00 ₺</td>
+                        <td>₺</td>
+                        <td>100.00 ₺</td>
+                        <td>Evet</td>
+                        <td>2021-10-22</td>
+                        <td>Yıllık</td>
+                        <td>Tefe</td>
+                        <td>İşlem</td>
+
+
+                        <td>
+
+
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Düzenle</a>
+                            <a href="" class="btn btn-danger btn-xs"
+                               onclick="return comfirm('Silmek İstediğinize Emin Misiniz ?')">Sil</a>
+
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" id="taxes_table" style="display:None">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron p-3" style="background: black;">
+                <h2><b style="font-size: large; color: aliceblue;">Vergi
+                    Bilgileri</b>
+                    <button type="button"
+                            style="color: #fff;
+                            background-color: #539777;
+                            border-color: #00ff89;"
+                            class="btn btn-success float-right"
+                            data-toggle="modal"
+                            data-target="#mymodal">Yeni Kayıt Ekle
+                    </button>
+                </h2>
+
+                <table class="table table-hover table-dark"
+                       style="font-size: xx-small; border-width: 1px; --bs-table-bg: #041f36; ">
+
+
+                    <tr style="color: goldenrod;border: burlywood;">
+                        <th>Kunut / İşyeri</th>
+                        <th>Emlak Vergisi Tutarı</th>
+                        <th>Emlak Vergisi Tarihi</th>
+                        <th>Emlak Vergisi Ödeme Periyodu</th>
+                        <th>Çöp Vegisi Tutarı</th>
+                        <th>Çöp Vergisi Tarihi</th>
+                        <th>Çöp Vergisi Ödeme Periyodu</th>
+                        <th>İşlem</th>
+
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>₺</td>
+                        <td>2,500.00 ₺</td>
+                        <td>2021-10-22</td>
+                        <td>(531) 707-17-25</td>
+                        <td>Her Ay Başı</td>
+                        <td>₺</td>
+                        <td>200.00 ₺</td>
+                        <td>₺</td>
+                        <td>100.00 ₺</td>
+                        <td>Evet</td>
+                        <td>2021-10-22</td>
+                        <td>Yıllık</td>
+                        <td>Tefe</td>
+                        <td>İşlem</td>
+
+
+                        <td>
+
+
+                            <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit">Düzenle</a>
+                            <a href="" class="btn btn-danger btn-xs"
+                               onclick="return comfirm('Silmek İstediğinize Emin Misiniz ?')">Sil</a>
+
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#kiracibilgisi").click(function (event) {
+
+            $("#btn-1").show();
+            $("#btn-2").hide();
+            $("#btn-3").hide();
+            $("#btn-4").hide();
+            $("#btn-5").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+
+
+        });
+        $("#kirabilgisi").click(function (event) {
+            $("#btn-2").show();
+            $("#btn-1").hide();
+            $("#btn-3").hide();
+            $("#btn-4").hide();
+            $("#btn-5").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+        });
+        $("#vergiler_").click(function (event) {
+            $("#btn-3").show();
+            $("#btn-1").hide();
+            $("#btn-2").hide();
+            $("#btn-4").hide();
+            $("#btn-5").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+        });
+        $("#sigorta_bilgileri_").click(function (event) {
+            $("#btn-4").show();
+            $("#btn-1").hide();
+            $("#btn-2").hide();
+            $("#btn-3").hide();
+            $("#btn-5").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+        });
+        $("#aidat_bilgileri_").click(function (event) {
+            $("#btn-5").show();
+            $("#btn-1").hide();
+            $("#btn-2").hide();
+            $("#btn-3").hide();
+            $("#btn-4").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+        });
+        $("#tenant_info").click(function (event) {
+            $("#btn-5").hide();
+            $("#btn-1").show();
+            $("#btn-2").hide();
+            $("#btn-3").hide();
+            $("#btn-4").hide();
+            $("#tenant_table_info").hide()
+            $("#taxes_table").hide()
+
+        });
+
+
+    });
+    console.log({{ tenants|safe }});
+
+
+
+
+
+
+</script>
+</body>
+
+
+</html>
