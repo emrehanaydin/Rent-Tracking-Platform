@@ -15,9 +15,9 @@ class Helper:
 
     def __init__(self):
         self.conn = mysql.connector.connect(
-            host="34.140.74.86",
+            host="",
             user="root",
-            password="300718cc",
+            password="",
             db="data",
         )
         self.cursor = self.conn.cursor(dictionary=True)
